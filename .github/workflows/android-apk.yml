@@ -1,4 +1,5 @@
-name: Build Android APK
+
+name: Build Spotube APK
 
 on:
   workflow_dispatch:
@@ -8,31 +9,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout release tag
         uses: actions/checkout@v4
+        with:
+          ref: v5.1.1
 
-      - name: Setup Java 21
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
 
-      - name: Setup Flutter
+      - name: Setup Flutter 3.22.0
         uses: subosito/flutter-action@v2
         with:
-          channel: stable
-
-      - name: Flutter version
-        run: flutter --version
+          flutter-version: 3.22.0
 
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build APK Release
+      - name: Build APK
         run: flutter build apk --release
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: spotube-release-apk
+          name: spotube-apk
           path: build/app/outputs/flutter-apk/app-release.apk
