@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout release tag
+      - name: Checkout Spotube
         uses: actions/checkout@v4
         with:
           repository: KRTirtho/spotube
@@ -20,10 +20,10 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Setup Flutter (usar versión del repo)
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.22.0
+          flutter-version: 3.29.0
 
       - name: Get dependencies
         run: flutter pub get
